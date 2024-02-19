@@ -1,6 +1,17 @@
 import styled, { createGlobalStyle } from 'styled-components';
+import fontObject from './fonts';
+
+const { regular, medium, semibold, bold } = fontObject;
 
 export const GlobalStyles = createGlobalStyle`
+
+@font-face {
+  font-family: 'Inter';
+  src: url(${regular}), url(${medium}), url(${semibold}), url(${bold});
+  font-weight: 400 500 600 700;
+  font-display: swap;
+}
+
 h1,
 h2,
 h3,
@@ -14,6 +25,10 @@ p {
 body {
   margin: 0;
   padding: 0;
+  font-family: 'Inter', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
 }
 
 p:last-child {
