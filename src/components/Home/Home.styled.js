@@ -13,7 +13,7 @@ export const HeroWrapper = styled.div`
   align-items: center;
 `;
 
-export const HeroInfoBox = styled.div`
+export const HeroMainText = styled.div`
   width: 595px;
 `;
 
@@ -60,4 +60,86 @@ export const SvgStyled = styled.svg`
 
 export const HeroImage = styled.img`
   border-radius: 10px;
+  position: relative;
+  z-index: -10;
+`;
+
+export const HeroInfoBox = styled.div`
+  padding: 32px;
+  border-radius: 20px;
+  background-color: ${({ theme }) => theme.colors.mainGreen};
+  display: flex;
+  gap: 16px;
+  position: absolute;
+  top: 478px;
+  left: 745px;
+  z-index: -5;
+`;
+
+export const CheckBackground = styled.div`
+  width: 54px;
+  height: 54px;
+  border-radius: 13px;
+  background-color: ${({ theme }) => theme.colors.white};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  & svg {
+    fill: ${({ theme }) => theme.colors.mainGreen};
+  }
+`;
+
+export const InfoTitle = styled.p`
+  color: ${({ theme }) => theme.colors.lightWhite};
+  margin-bottom: 8px;
+  font-size: 14px;
+  font-weight: 400;
+`;
+
+export const InfoNumber = styled.p`
+  color: ${({ theme }) => theme.colors.white};
+  font-size: 24px;
+  font-weight: 700;
+  line-height: normal;
+`;
+
+export const QuestionIcon = styled.div`
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  transform: rotate(-15deg);
+  background-color: ${({ theme }) => theme.colors.violet};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 329px;
+  left: 814px;
+  z-index: -5;
+
+  & svg {
+    fill: ${({ theme }) => theme.colors.white};
+    transform: rotate(15deg);
+  }
+`;
+
+export const UsersIcon = styled.div`
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
+  transform: rotate(15deg);
+  background-color: ${({ theme }) => theme.colors.yellow};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 186px;
+  right: 88px;
+  z-index: -5;
+
+  & svg {
+    fill: ${({ theme }) => theme.colors.white};
+    transform: rotate(-12deg);
+  }
 `;
