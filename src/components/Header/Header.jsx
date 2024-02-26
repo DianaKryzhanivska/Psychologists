@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   AuthBox,
   NameNavLink,
@@ -9,8 +9,17 @@ import {
   Span,
   StyledContainer,
 } from './Header.styled';
+import Modal from '../Modal/Modal';
+import LoginForm from '../LoginForm/LoginForm';
 
 const Header = () => {
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const handleOpenLoginModal = () => {
+    setIsLoginModalOpen(true);
+  };
+  const handleCloseLoginModal = () => {
+    setIsLoginModalOpen(false);
+  };
   return (
     <>
       <header>
@@ -23,11 +32,14 @@ const Header = () => {
             <NavBarLink to="/psychologists">Psychologists</NavBarLink>
           </NavBar>
           <AuthBox>
-            <SignInBtn>Log in</SignInBtn>
+            <SignInBtn onClick={handleOpenLoginModal}>Log in</SignInBtn>
             <SignUpBtn>Registration</SignUpBtn>
           </AuthBox>
         </StyledContainer>
       </header>
+      <Modal isOpen={isLoginModalOpen} onClose={handleCloseLoginModal}>
+        <LoginForm />
+      </Modal>
     </>
   );
 };

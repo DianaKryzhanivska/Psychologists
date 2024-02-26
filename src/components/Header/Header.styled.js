@@ -8,6 +8,7 @@ export const StyledContainer = styled(Container)`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  border-bottom: 1px solid rgba(25, 26, 21, 0.1);
 `;
 
 export const NameNavLink = styled(NavLink)`
