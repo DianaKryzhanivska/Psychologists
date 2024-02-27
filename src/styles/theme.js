@@ -4,7 +4,9 @@ export const theme = {
     white: '#FBFBFB',
     black: '#191A15',
     lightWhite: 'rgba(251, 251, 251, 0.50)',
+    gray: 'rgba(25, 26, 21, 0.50)',
     violet: '#4535AF',
     yellow: '#FBC75E',
+    borderGray: 'rgba(25, 26, 21, 0.10)',
   },
 };

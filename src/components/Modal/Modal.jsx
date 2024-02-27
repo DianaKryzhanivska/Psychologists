@@ -30,7 +30,7 @@ const Modal = ({ isOpen, onClose, children }) => {
   return (
     <>
       <ModalOverlay onClick={onClose}>
-        <ModalContent>
+        <ModalContent onClick={e => e.stopPropagation()}>
           <CloseBtn onClick={onClose}>
             <svg width="32" height="32">
               <use href={`${sprite}#close`} />
