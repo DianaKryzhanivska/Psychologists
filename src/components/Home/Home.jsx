@@ -7,7 +7,7 @@ import {
   StyledContainer,
   SvgStyled,
   HeroWrapper,
-  HeroImage,
+  ImageWrapper,
   HeroMainText,
   HeroInfoBox,
   CheckBackground,
@@ -41,33 +41,35 @@ const Home = () => {
               </SvgStyled>
             </NavLinkStyled>
           </HeroMainText>
-          <HeroImage
-            srcSet={`${usual} 1x, ${retina} 2x`}
-            width="464"
-            height="526"
-            alt="psychologist's photo"
-          />
-          <HeroInfoBox>
-            <CheckBackground>
-              <svg width="30" height="30">
-                <use href={`${sprite}#check`} />
+          <ImageWrapper>
+            <img
+              srcSet={`${usual} 1x, ${retina} 2x`}
+              width="464"
+              height="526"
+              alt="psychologist"
+            />
+            <HeroInfoBox>
+              <CheckBackground>
+                <svg width="30" height="30">
+                  <use href={`${sprite}#check`} />
+                </svg>
+              </CheckBackground>
+              <div>
+                <InfoTitle>Experienced psychologists</InfoTitle>
+                <InfoNumber>15,000</InfoNumber>
+              </div>
+            </HeroInfoBox>
+            <QuestionIcon>
+              <svg width="17" height="18">
+                <use href={`${sprite}#question`} />
               </svg>
-            </CheckBackground>
-            <div>
-              <InfoTitle>Experienced psychologists</InfoTitle>
-              <InfoNumber>15,000</InfoNumber>
-            </div>
-          </HeroInfoBox>
-          <QuestionIcon>
-            <svg width="17" height="18">
-              <use href={`${sprite}#question`} />
-            </svg>
-          </QuestionIcon>
-          <UsersIcon>
-            <svg width="28" height="28">
-              <use href={`${sprite}#users`} />
-            </svg>
-          </UsersIcon>
+            </QuestionIcon>
+            <UsersIcon>
+              <svg width="28" height="28">
+                <use href={`${sprite}#users`} />
+              </svg>
+            </UsersIcon>
+          </ImageWrapper>
         </HeroWrapper>
       </StyledContainer>
     </>

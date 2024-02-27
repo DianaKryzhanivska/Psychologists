@@ -11,6 +11,9 @@ export const HeroWrapper = styled.div`
   display: flex;
   gap: 125px;
   align-items: center;
+  /* width: 1184px; */
+  /* margin-left: auto; */
+  /* margin-right: auto; */
 `;
 
 export const HeroMainText = styled.div`
@@ -58,7 +61,7 @@ export const SvgStyled = styled.svg`
   fill: ${({ theme }) => theme.colors.white};
 `;
 
-export const HeroImage = styled.img`
+export const ImageWrapper = styled.div`
   border-radius: 10px;
   position: relative;
   z-index: -10;
@@ -71,9 +74,9 @@ export const HeroInfoBox = styled.div`
   display: flex;
   gap: 16px;
   position: absolute;
-  top: 478px;
-  left: 745px;
-  z-index: -5;
+  left: -104px;
+  bottom: 75px;
+  z-index: 5;
 `;
 
 export const CheckBackground = styled.div`
@@ -114,9 +117,9 @@ export const QuestionIcon = styled.div`
   align-items: center;
   justify-content: center;
   position: absolute;
-  top: 329px;
-  left: 814px;
-  z-index: -5;
+  top: 190px;
+  left: -30px;
+  z-index: 5;
 
   & svg {
     fill: ${({ theme }) => theme.colors.white};
@@ -134,9 +137,9 @@ export const UsersIcon = styled.div`
   align-items: center;
   justify-content: center;
   position: absolute;
-  top: 186px;
-  right: 88px;
-  z-index: -5;
+  top: 40px;
+  right: -40px;
+  z-index: 5;
 
   & svg {
     fill: ${({ theme }) => theme.colors.white};
