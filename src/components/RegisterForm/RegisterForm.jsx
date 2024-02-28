@@ -9,8 +9,32 @@ import {
 import React from 'react';
 import sprite from '../../images/sprite.svg';
 import { SubmitBtn } from './RegisterForm.styled';
+import { Formik } from 'formik';
+import { toast } from 'react-toastify';
+import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
+import { useDispatch } from 'react-redux';
+import { setUser } from '../../redux/auth/slice';
 
-const RegisterForm = () => {
+const RegisterForm = ({ onClose }) => {
+  const dispatch = useDispatch();
+  const auth = getAuth();
+
+  const handleSubmit = values => {
+    createUserWithEmailAndPassword(auth, values.email, values.password)
+      .then(({ user }) => {
+        dispatch(
+          setUser({
+            email: user.email,
+            id: user.uid,
+            token: user.accessToken,
+            name: user.displayName,
+          })
+        );
+      })
+      .catch(console.error);
+    toast.success(`Welcome ${values.name}`);
+    onClose();
+  };
   return (
     <>
       <Wrapper>
@@ -20,17 +44,82 @@ const RegisterForm = () => {
           need some information. Please provide us with the following
           information.
         </Text>
-        <Form>
-          <InputBox>
-            <input type="text" placeholder="Name" />
-            <input type="text" placeholder="Email" />
-            <input type="text" placeholder="Password" />
-            <Icon width="20" height="20">
-              <use href={`${sprite}#eye-off`} />
-            </Icon>
-          </InputBox>
-          <SubmitBtn type="submit">Sign Up</SubmitBtn>
-        </Form>
+        <Formik
+          initialValues={{ name: '', email: '', password: '' }}
+          validate={values => {
+            const errors = {};
+            if (!values.name) {
+              errors.name = 'Required';
+            }
+            if (!values.email) {
+              errors.email = 'Required';
+            } else if (
+              !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
+            ) {
+              errors.email = 'Invalid email address';
+            }
+            if (!values.password) {
+              errors.password = 'Required';
+            }
+            return errors;
+          }}
+          onSubmit={(values, { setSubmitting, resetForm }) => {
+            handleSubmit(values);
+            resetForm();
+            setSubmitting(false);
+          }}
+        >
+          {({
+            values,
+            errors,
+            touched,
+            handleChange,
+            handleBlur,
+            handleSubmit,
+            isSubmitting,
+          }) => (
+            <Form onSubmit={handleSubmit}>
+              <InputBox>
+                <input
+                  type="text"
+                  name="name"
+                  placeholder="Name"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  className={errors.name && touched.name ? 'error' : ''}
+                  value={values.name}
+                />
+                {errors.name && touched.name && <span>{errors.name}</span>}
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="Email"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  className={errors.name && touched.name ? 'error' : ''}
+                  value={values.email}
+                />
+                {errors.name && touched.name && <span>{errors.email}</span>}
+                <input
+                  type="text"
+                  name="password"
+                  placeholder="Password"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  className={errors.name && touched.name ? 'error' : ''}
+                  value={values.password}
+                />
+                {errors.name && touched.name && <span>{errors.password}</span>}
+                <Icon width="20" height="20">
+                  <use href={`${sprite}#eye-off`} />
+                </Icon>
+              </InputBox>
+              <SubmitBtn type="submit" disabled={isSubmitting}>
+                Sign Up
+              </SubmitBtn>
+            </Form>
+          )}
+        </Formik>
       </Wrapper>
     </>
   );

@@ -9,8 +9,32 @@ import {
   Title,
   Wrapper,
 } from './LoginForm.styled';
+import { Formik } from 'formik';
+import { toast } from 'react-toastify';
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import { useDispatch } from 'react-redux';
+import { setUser } from '../../redux/auth/slice';
 
 const LoginForm = ({ onClose }) => {
+  const dispatch = useDispatch();
+  const auth = getAuth();
+  const handleSubmit = values => {
+    signInWithEmailAndPassword(auth, values.email, values.password)
+      .then(({ user }) => {
+        dispatch(
+          setUser({
+            email: user.email,
+            id: user.uid,
+            token: user.accessToken,
+          })
+        );
+      })
+      .catch(console.error);
+    toast.success(`Welcome ${values.email}`);
+    if (onClose) {
+      onClose();
+    }
+  };
   return (
     <>
       <Wrapper>
@@ -19,16 +43,65 @@ const LoginForm = ({ onClose }) => {
           Welcome back! Please enter your credentials to access your account and
           continue your search for a psychologist.
         </Text>
-        <Form>
-          <InputBox>
-            <input type="text" placeholder="Email" />
-            <input type="text" placeholder="Password" />
-            <Icon width="20" height="20">
-              <use href={`${sprite}#eye-off`} />
-            </Icon>
-          </InputBox>
-          <SubmitBtn type="submit">Log In</SubmitBtn>
-        </Form>
+        <Formik
+          initialValues={{ email: '', password: '' }}
+          validate={values => {
+            const errors = {};
+            if (!values.email) {
+              errors.email = 'Required';
+            }
+            if (!values.password) {
+              errors.password = 'Required';
+            }
+            return errors;
+          }}
+          onSubmit={(values, { setSubmitting, resetForm }) => {
+            handleSubmit(values);
+            resetForm();
+            setSubmitting(false);
+          }}
+        >
+          {({
+            values,
+            errors,
+            touched,
+            handleChange,
+            handleBlur,
+            handleSubmit,
+            isSubmitting,
+          }) => (
+            <Form onSubmit={handleSubmit}>
+              <InputBox>
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="Email"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  className={errors.name && touched.name ? 'error' : ''}
+                  value={values.email}
+                />
+                {errors.name && touched.name && <span>{errors.email}</span>}
+                <input
+                  type="text"
+                  name="password"
+                  placeholder="Password"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  className={errors.name && touched.name ? 'error' : ''}
+                  value={values.password}
+                />
+                {errors.name && touched.name && <span>{errors.password}</span>}
+                <Icon width="20" height="20">
+                  <use href={`${sprite}#eye-off`} />
+                </Icon>
+              </InputBox>
+              <SubmitBtn type="submit" disabled={isSubmitting}>
+                Log In
+              </SubmitBtn>
+            </Form>
+          )}
+        </Formik>
       </Wrapper>
     </>
   );

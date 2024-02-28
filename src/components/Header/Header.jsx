@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import {
+  AccountBox,
+  AccountInfo,
   AuthBox,
+  LogoutBtn,
   NameNavLink,
   NavBar,
   NavBarLink,
@@ -8,12 +11,20 @@ import {
   SignUpBtn,
   Span,
   StyledContainer,
+  UserIcon,
+  UserName,
 } from './Header.styled';
 import Modal from '../Modal/Modal';
 import LoginForm from '../LoginForm/LoginForm';
 import RegisterForm from 'components/RegisterForm/RegisterForm';
+import { useDispatch } from 'react-redux';
+import { removeUser } from '../../redux/auth/slice';
+import sprite from '../../images/sprite.svg';
+import { useAuth } from 'hooks/useAuth';
 
 const Header = () => {
+  const dispatch = useDispatch();
+  const { isAuth, email } = useAuth();
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
   const handleOpenLoginModal = () => {
@@ -22,7 +33,7 @@ const Header = () => {
   const handleCloseLoginModal = () => {
     setIsLoginModalOpen(false);
   };
-  const handleOpenRedisterModal = () => {
+  const handleOpenRegisterModal = () => {
     setIsRegisterModalOpen(true);
   };
   const handleCloseRegisterModal = () => {
@@ -39,12 +50,30 @@ const Header = () => {
             <NavBarLink to="/">Home</NavBarLink>
             <NavBarLink to="/psychologists">Psychologists</NavBarLink>
           </NavBar>
-          <AuthBox>
-            <SignInBtn onClick={handleOpenLoginModal}>Log in</SignInBtn>
-            <SignUpBtn onClick={handleOpenRedisterModal}>
-              Registration
-            </SignUpBtn>
-          </AuthBox>
+          {isAuth ? (
+            <AuthBox>
+              <SignInBtn type="button" onClick={handleOpenLoginModal}>
+                Log in
+              </SignInBtn>
+              <SignUpBtn type="button" onClick={handleOpenRegisterModal}>
+                Registration
+              </SignUpBtn>
+            </AuthBox>
+          ) : (
+            <AccountBox>
+              <AccountInfo>
+                <UserIcon>
+                  <svg width="24" height="24">
+                    <use href={`${sprite}#user`} />
+                  </svg>
+                </UserIcon>
+                <UserName>{email}</UserName>
+              </AccountInfo>
+              <LogoutBtn type="button" onClick={() => dispatch(removeUser())}>
+                Log out
+              </LogoutBtn>
+            </AccountBox>
+          )}
         </StyledContainer>
       </header>
       <Modal isOpen={isLoginModalOpen} onClose={handleCloseLoginModal}>

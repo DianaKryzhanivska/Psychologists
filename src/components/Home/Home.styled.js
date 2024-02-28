@@ -11,9 +11,6 @@ export const HeroWrapper = styled.div`
   display: flex;
   gap: 125px;
   align-items: center;
-  /* width: 1184px; */
-  /* margin-left: auto; */
-  /* margin-right: auto; */
 `;
 
 export const HeroMainText = styled.div`

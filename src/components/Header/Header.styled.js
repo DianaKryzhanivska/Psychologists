@@ -58,3 +58,47 @@ export const SignUpBtn = styled.button`
   line-height: 1.25em;
   letter-spacing: -0.16px;
 `;
+
+export const UserIcon = styled.div`
+  width: 40px;
+  height: 40px;
+  background: ${({ theme }) => theme.colors.mainGreen};
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  & svg {
+    fill: ${({ theme }) => theme.colors.white};
+  }
+`;
+
+export const AccountBox = styled.div`
+  display: flex;
+  gap: 28px;
+  align-items: center;
+`;
+
+export const AccountInfo = styled.div`
+  display: flex;
+  gap: 14px;
+  align-items: center;
+`;
+
+export const UserName = styled.p`
+  color: ${({ theme }) => theme.colors.black};
+  font-weight: 500;
+  line-height: 1.25em;
+  letter-spacing: -0.16px;
+`;
+
+export const LogoutBtn = styled.button`
+  padding: 14px 39px;
+  border-radius: 30px;
+  border: 1px solid rgba(25, 26, 21, 0.2);
+  color: ${({ theme }) => theme.colors.black};
+  background: transparent;
+  font-weight: 500;
+  line-height: 1.25em;
+  letter-spacing: -0.16px;
+`;
