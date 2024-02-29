@@ -11,5 +11,7 @@ export const theme = {
     boldGray: '#8A8A89',
     backgroundGray: '#f3f3f3',
     green: '#38CD3E',
+    backgroundLightGreen: 'rgba(84, 190, 150, 0.20)',
+    star: '#FFC531',
   },
 };
