@@ -21,6 +21,7 @@ import { useDispatch } from 'react-redux';
 import { removeUser } from '../../redux/auth/slice';
 import sprite from '../../images/sprite.svg';
 import { useAuth } from 'hooks/useAuth';
+import { toast } from 'react-toastify';
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -38,6 +39,10 @@ const Header = () => {
   };
   const handleCloseRegisterModal = () => {
     setIsRegisterModalOpen(false);
+  };
+  const handleLogout = () => {
+    dispatch(removeUser());
+    toast(`Good bye!`);
   };
   return (
     <>
@@ -69,7 +74,7 @@ const Header = () => {
                 </UserIcon>
                 <UserName>{email}</UserName>
               </AccountInfo>
-              <LogoutBtn type="button" onClick={() => dispatch(removeUser())}>
+              <LogoutBtn type="button" onClick={handleLogout}>
                 Log out
               </LogoutBtn>
             </AccountBox>
@@ -77,10 +82,10 @@ const Header = () => {
         </StyledContainer>
       </header>
       <Modal isOpen={isLoginModalOpen} onClose={handleCloseLoginModal}>
-        <LoginForm />
+        <LoginForm closeModal={handleCloseLoginModal} />
       </Modal>
       <Modal isOpen={isRegisterModalOpen} onClose={handleCloseRegisterModal}>
-        <RegisterForm />
+        <RegisterForm closeModal={handleCloseRegisterModal} />
       </Modal>
     </>
   );

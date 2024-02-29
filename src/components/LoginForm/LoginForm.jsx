@@ -15,7 +15,7 @@ import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { useDispatch } from 'react-redux';
 import { setUser } from '../../redux/auth/slice';
 
-const LoginForm = ({ onClose }) => {
+const LoginForm = ({ closeModal }) => {
   const dispatch = useDispatch();
   const auth = getAuth();
   const handleSubmit = values => {
@@ -31,9 +31,7 @@ const LoginForm = ({ onClose }) => {
       })
       .catch(console.error);
     toast.success(`Welcome ${values.email}`);
-    if (onClose) {
-      onClose();
-    }
+    closeModal();
   };
   return (
     <>

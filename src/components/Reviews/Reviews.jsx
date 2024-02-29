@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import sprite from '../../images/sprite.svg';
 import {
   Comment,
@@ -9,8 +9,17 @@ import {
   Rating,
   Reviewer,
 } from './Reviews.styled';
+import AppointmentForm from 'components/AppointmentForm/AppointmentForm';
+import Modal from 'components/Modal/Modal';
 
-const Reviews = ({ reviews }) => {
+const Reviews = ({ reviews, psychologist }) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
   return (
     <>
       <List>
@@ -32,7 +41,17 @@ const Reviews = ({ reviews }) => {
           </li>
         ))}
       </List>
-      <MeetingBtn type="button">Make an appointment</MeetingBtn>
+      <MeetingBtn type="button" onClick={openModal}>
+        Make an appointment
+      </MeetingBtn>
+      {isModalOpen && (
+        <Modal isOpen={isModalOpen} onClose={closeModal}>
+          <AppointmentForm
+            psychologist={psychologist}
+            closeModal={closeModal}
+          />
+        </Modal>
+      )}
     </>
   );
 };

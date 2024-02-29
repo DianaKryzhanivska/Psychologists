@@ -14,7 +14,7 @@ import {
 import sprite from '../../images/sprite.svg';
 import Reviews from 'components/Reviews/Reviews';
 
-const SingleCard = ({ psychologist }) => {
+const SingleCard = ({ psychologist, openModal }) => {
   const [readMore, setReadMore] = useState(false);
   const {
     name,
@@ -81,7 +81,13 @@ const SingleCard = ({ psychologist }) => {
               Read more
             </ReadMoreBtn>
           )}
-          {readMore && <Reviews reviews={reviews} />}
+          {readMore && (
+            <Reviews
+              reviews={reviews}
+              openModal={openModal}
+              psychologist={psychologist}
+            />
+          )}
         </div>
       </Item>
     </>

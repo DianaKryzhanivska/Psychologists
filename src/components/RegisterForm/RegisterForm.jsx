@@ -15,7 +15,7 @@ import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 import { useDispatch } from 'react-redux';
 import { setUser } from '../../redux/auth/slice';
 
-const RegisterForm = ({ onClose }) => {
+const RegisterForm = ({ closeModal }) => {
   const dispatch = useDispatch();
   const auth = getAuth();
 
@@ -33,7 +33,7 @@ const RegisterForm = ({ onClose }) => {
       })
       .catch(console.error);
     toast.success(`Welcome ${values.name}`);
-    onClose();
+    closeModal();
   };
   return (
     <>

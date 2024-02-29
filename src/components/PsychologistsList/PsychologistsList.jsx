@@ -4,7 +4,7 @@ import { collection, getDocs } from 'firebase/firestore/lite';
 import { db } from '../../firebase';
 import SingleCard from 'components/SingleCard/SingleCard';
 
-const PsychologistsList = () => {
+const PsychologistsList = ({ openModal }) => {
   const [psychologists, setPsychologists] = useState([]);
 
   useEffect(() => {
@@ -29,7 +29,11 @@ const PsychologistsList = () => {
       <StyledContainer>
         <List>
           {psychologists?.map(psychologist => (
-            <SingleCard key={psychologist.id} psychologist={psychologist} />
+            <SingleCard
+              key={psychologist.id}
+              psychologist={psychologist}
+              openModal={openModal}
+            />
           ))}
         </List>
         <LoadMoreBtn>Load more</LoadMoreBtn>
