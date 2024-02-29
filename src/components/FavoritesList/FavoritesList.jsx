@@ -1,44 +1,36 @@
-import React, { useEffect, useState } from 'react';
-import { StyledContainer } from './FavoritesList.styled';
-import { collection, getDocs } from 'firebase/firestore/lite';
-import { db } from '../../firebase';
+import React from 'react';
+import { Message, StyledContainer } from './FavoritesList.styled';
 import {
   List,
   LoadMoreBtn,
 } from 'components/PsychologistsList/PsychologistsList.styled';
 import SingleCard from 'components/SingleCard/SingleCard';
+import { useSelector } from 'react-redux';
+import { selectFavorites } from '../../redux/selectors';
 
 const FavoritesList = ({ openModal }) => {
-  const [psychologists, setPsychologists] = useState([]);
+  const favorites = useSelector(selectFavorites);
 
-  useEffect(() => {
-    async function fetchPsychologists() {
-      try {
-        const psychologistsCol = collection(db, 'psychologists');
-        const psychologistsSnapshot = await getDocs(psychologistsCol);
-        const psychologistsList = psychologistsSnapshot.docs.map(doc => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
-        setPsychologists(psychologistsList);
-      } catch (error) {
-        console.error('Error fetching psychologists:', error);
-      }
-    }
-    fetchPsychologists();
-  }, []);
   return (
     <>
       <StyledContainer>
         <List>
-          {psychologists?.map(psychologist => (
-            <SingleCard
-              key={psychologist.id}
-              psychologist={psychologist}
-              openModal={openModal}
-            />
-          ))}
+          {favorites?.length > 0 ? (
+            favorites.map(psychologist => (
+              <SingleCard
+                key={psychologist.id}
+                psychologist={psychologist}
+                openModal={openModal}
+              />
+            ))
+          ) : (
+            <Message>
+              You haven't added any psychologists to your favorites yet. Let's
+              choose!
+            </Message>
+          )}
         </List>
+
         <LoadMoreBtn>Load more</LoadMoreBtn>
       </StyledContainer>
     </>

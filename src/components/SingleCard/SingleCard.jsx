@@ -14,10 +14,19 @@ import {
 } from './SingleCard.styled';
 import sprite from '../../images/sprite.svg';
 import Reviews from 'components/Reviews/Reviews';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectFavorites } from '../../redux/selectors';
+import { addToFavorites, removeFromFavorites } from '../../redux/slice';
+import { toast } from 'react-toastify';
 
 const SingleCard = ({ psychologist, openModal }) => {
+  const dispatch = useDispatch();
   const [readMore, setReadMore] = useState(false);
-  const [isFavorite, setIsFavorite] = useState(false);
+  const favorites = useSelector(selectFavorites);
+  const isFavorite = favorites.some(
+    favorite => favorite.id === psychologist.id
+  );
+
   const {
     name,
     avatar_url,
@@ -32,8 +41,13 @@ const SingleCard = ({ psychologist, openModal }) => {
   } = psychologist;
 
   const handleToggleFav = () => {
-    setIsFavorite(prev => !prev);
-    console.log(isFavorite);
+    if (isFavorite) {
+      dispatch(removeFromFavorites(psychologist.id));
+      toast.error(`Psychologist ${psychologist.name} deleted from favorites`);
+    } else {
+      dispatch(addToFavorites(psychologist));
+      toast.success(`Psychologist ${psychologist.name} added to favorites`);
+    }
   };
 
   const handleReadMore = () => {

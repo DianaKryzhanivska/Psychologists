@@ -11,15 +11,17 @@ import {
 import storage from 'redux-persist/lib/storage';
 import { authReducer } from './auth/slice';
 import { configureStore } from '@reduxjs/toolkit';
+import { psychologistsReducer } from './slice';
 
 const authPersistConfig = {
-  key: 'auth',
+  key: 'root',
   storage,
   whitelist: ['token'],
 };
 
 const rootReducer = {
   auth: persistReducer(authPersistConfig, authReducer),
+  psychologists: persistReducer(authPersistConfig, psychologistsReducer),
 };
 
 export const store = configureStore({

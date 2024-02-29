@@ -3,8 +3,11 @@ import { List, LoadMoreBtn, StyledContainer } from './PsychologistsList.styled';
 import { collection, getDocs } from 'firebase/firestore/lite';
 import { db } from '../../firebase';
 import SingleCard from 'components/SingleCard/SingleCard';
+import { useSelector } from 'react-redux';
+import { selectFavorites } from '../../redux/selectors';
 
 const PsychologistsList = ({ openModal }) => {
+  const favorites = useSelector(selectFavorites);
   const [psychologists, setPsychologists] = useState([]);
 
   useEffect(() => {
@@ -15,6 +18,7 @@ const PsychologistsList = ({ openModal }) => {
         const psychologistsList = psychologistsSnapshot.docs.map(doc => ({
           id: doc.id,
           ...doc.data(),
+          isFavorite: favorites.some(favorite => favorite.id === doc.id),
         }));
         setPsychologists(psychologistsList);
       } catch (error) {
@@ -22,7 +26,7 @@ const PsychologistsList = ({ openModal }) => {
       }
     }
     fetchPsychologists();
-  }, []);
+  }, [favorites]);
 
   return (
     <>
