@@ -29,6 +29,7 @@ body {
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
+  background: #F3F3F3;
 }
 
 p:last-child {

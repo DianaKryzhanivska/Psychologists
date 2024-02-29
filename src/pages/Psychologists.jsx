@@ -1,7 +1,8 @@
 import React from 'react';
+import PsychologistsList from 'components/PsychologistsList/PsychologistsList';
 
 const Psychologists = () => {
-  return <div>Psychologists</div>;
+  return <PsychologistsList />;
 };
 
 export default Psychologists;
