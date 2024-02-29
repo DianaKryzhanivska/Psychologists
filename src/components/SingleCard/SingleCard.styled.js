@@ -35,6 +35,18 @@ export const Price = styled.p`
   margin-right: 28px;
 `;
 
+export const BtnFav = styled.button`
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  & svg {
+    width: 26px;
+    height: 26px;
+  }
+`;
+
 export const ImageWrapper = styled.div`
   position: relative;
   min-width: 120px;

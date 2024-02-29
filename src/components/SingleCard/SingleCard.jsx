@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import {
+  BtnFav,
   Desc,
   Features,
   ImageWrapper,
@@ -16,6 +17,7 @@ import Reviews from 'components/Reviews/Reviews';
 
 const SingleCard = ({ psychologist, openModal }) => {
   const [readMore, setReadMore] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(false);
   const {
     name,
     avatar_url,
@@ -28,6 +30,11 @@ const SingleCard = ({ psychologist, openModal }) => {
     initial_consultation,
     about,
   } = psychologist;
+
+  const handleToggleFav = () => {
+    setIsFavorite(prev => !prev);
+    console.log(isFavorite);
+  };
 
   const handleReadMore = () => {
     setReadMore(true);
@@ -44,13 +51,17 @@ const SingleCard = ({ psychologist, openModal }) => {
           <Price>
             Price / 1 hour: <span>{price_per_hour}$</span>
           </Price>
-          <svg
-            width="26"
-            height="26"
-            style={{ fill: 'none', stroke: '#191A15' }}
-          >
-            <use href={`${sprite}#heart`} />
-          </svg>
+          <BtnFav type="button" onClick={handleToggleFav}>
+            {!isFavorite ? (
+              <svg style={{ fill: 'none', stroke: '#191A15' }}>
+                <use href={`${sprite}#heart`} />
+              </svg>
+            ) : (
+              <svg style={{ fill: '#54BE96', stroke: '#54BE96' }}>
+                <use href={`${sprite}#heart-hover`} />
+              </svg>
+            )}
+          </BtnFav>
         </Statistics>
         <ImageWrapper>
           <img src={avatar_url} alt="psychologist" />
