@@ -30,6 +30,7 @@ const RegisterForm = ({ closeModal }) => {
             name: user.displayName,
           })
         );
+        // localStorage.setItem('accessToken', user.accessToken);
       })
       .catch(console.error);
     toast.success(`Welcome ${values.name}`);
@@ -96,20 +97,22 @@ const RegisterForm = ({ closeModal }) => {
                   placeholder="Email"
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  className={errors.name && touched.name ? 'error' : ''}
+                  className={errors.email && touched.email ? 'error' : ''}
                   value={values.email}
                 />
-                {errors.name && touched.name && <span>{errors.email}</span>}
+                {errors.email && touched.email && <span>{errors.email}</span>}
                 <input
                   type="text"
                   name="password"
                   placeholder="Password"
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  className={errors.name && touched.name ? 'error' : ''}
+                  className={errors.password && touched.password ? 'error' : ''}
                   value={values.password}
                 />
-                {errors.name && touched.name && <span>{errors.password}</span>}
+                {errors.password && touched.password && (
+                  <span>{errors.password}</span>
+                )}
                 <Icon width="20" height="20">
                   <use href={`${sprite}#eye-off`} />
                 </Icon>

@@ -62,7 +62,7 @@ const FavoritesList = ({ openModal }) => {
   return (
     <>
       <StyledContainer>
-        <Filter applyFilter={handleFilterData} />
+        {favorites?.length > 0 && <Filter applyFilter={handleFilterData} />}
         <List>
           {favorites?.length > 0 ? (
             filteredData.map(psychologist => (
