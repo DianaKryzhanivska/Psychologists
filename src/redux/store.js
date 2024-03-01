@@ -16,7 +16,7 @@ import { psychologistsReducer } from './slice';
 const authPersistConfig = {
   key: 'root',
   storage,
-  whitelist: ['token'],
+  whitelist: ['token', 'name'],
 };
 
 const rootReducer = {

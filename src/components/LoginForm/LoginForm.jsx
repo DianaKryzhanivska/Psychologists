@@ -12,12 +12,13 @@ import {
 import { Formik } from 'formik';
 import { toast } from 'react-toastify';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setUser } from '../../redux/auth/slice';
 
 const LoginForm = ({ closeModal }) => {
   const dispatch = useDispatch();
   const auth = getAuth();
+  const { name } = useSelector(state => state.auth);
   const handleSubmit = values => {
     signInWithEmailAndPassword(auth, values.email, values.password)
       .then(({ user }) => {
@@ -26,10 +27,9 @@ const LoginForm = ({ closeModal }) => {
             email: user.email,
             id: user.uid,
             token: user.accessToken,
-            name: user.displayName,
+            name: name,
           })
         );
-        // localStorage.setItem('accessToken', user.accessToken);
       })
       .catch(console.error);
     toast.success(`Welcome ${values.email}`);

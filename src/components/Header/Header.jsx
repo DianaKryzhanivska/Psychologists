@@ -25,7 +25,7 @@ import { toast } from 'react-toastify';
 
 const Header = () => {
   const dispatch = useDispatch();
-  const { isAuth, email } = useAuth();
+  const { isAuth, email, name } = useAuth();
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
   const handleOpenLoginModal = () => {
@@ -44,6 +44,7 @@ const Header = () => {
     dispatch(removeUser());
     toast(`Good bye!`);
   };
+
   return (
     <>
       <header>
@@ -73,7 +74,7 @@ const Header = () => {
                     <use href={`${sprite}#user`} />
                   </svg>
                 </UserIcon>
-                <UserName>{email}</UserName>
+                <UserName>{name || email}</UserName>
               </AccountInfo>
               <LogoutBtn type="button" onClick={handleLogout}>
                 Log out

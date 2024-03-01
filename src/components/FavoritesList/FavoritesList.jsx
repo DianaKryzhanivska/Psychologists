@@ -12,6 +12,8 @@ import Filter from 'components/Filter/Filter';
 const FavoritesList = ({ openModal }) => {
   const favorites = useSelector(selectFavorites);
   const [filteredData, setFilteredData] = useState([...favorites]);
+  const [page, setPage] = useState(1);
+  const [limit, setLimit] = useState(3);
 
   useEffect(() => {
     setFilteredData([...favorites]);
@@ -59,13 +61,20 @@ const FavoritesList = ({ openModal }) => {
     }
   };
 
+  const displayedFavorites = filteredData.slice(0, limit);
+
+  const handleLoadMore = () => {
+    setLimit(prevLimit => prevLimit + 3);
+    setPage(prevPage => prevPage + 1);
+  };
+
   return (
     <>
       <StyledContainer>
         {favorites?.length > 0 && <Filter applyFilter={handleFilterData} />}
         <List>
           {favorites?.length > 0 ? (
-            filteredData.map(psychologist => (
+            displayedFavorites.map(psychologist => (
               <SingleCard
                 key={psychologist.id}
                 psychologist={psychologist}
@@ -79,8 +88,11 @@ const FavoritesList = ({ openModal }) => {
             </Message>
           )}
         </List>
-
-        <LoadMoreBtn>Load more</LoadMoreBtn>
+        {limit < filteredData.length && (
+          <LoadMoreBtn type="button" onClick={handleLoadMore}>
+            Load more
+          </LoadMoreBtn>
+        )}
       </StyledContainer>
     </>
   );

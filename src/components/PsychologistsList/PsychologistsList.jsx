@@ -11,6 +11,8 @@ const PsychologistsList = ({ openModal }) => {
   const favorites = useSelector(selectFavorites);
   const [psychologists, setPsychologists] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
+  const [page, setPage] = useState(1);
+  const [limit, setLimit] = useState(3);
 
   useEffect(() => {
     async function fetchPsychologists() {
@@ -75,12 +77,19 @@ const PsychologistsList = ({ openModal }) => {
     }
   };
 
+  const displayedPsychologists = filteredData.slice(0, limit);
+
+  const handleLoadMore = () => {
+    setLimit(prevLimit => prevLimit + 3);
+    setPage(prevPage => prevPage + 1);
+  };
+
   return (
     <>
       <StyledContainer>
         <Filter applyFilter={handleFilterData} />
         <List>
-          {filteredData?.map(psychologist => (
+          {displayedPsychologists?.map(psychologist => (
             <SingleCard
               key={psychologist.id}
               psychologist={psychologist}
@@ -88,7 +97,11 @@ const PsychologistsList = ({ openModal }) => {
             />
           ))}
         </List>
-        <LoadMoreBtn>Load more</LoadMoreBtn>
+        {limit < filteredData.length && (
+          <LoadMoreBtn type="button" onClick={handleLoadMore}>
+            Load more
+          </LoadMoreBtn>
+        )}
       </StyledContainer>
     </>
   );

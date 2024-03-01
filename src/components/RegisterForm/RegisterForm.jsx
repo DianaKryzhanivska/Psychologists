@@ -11,7 +11,11 @@ import sprite from '../../images/sprite.svg';
 import { SubmitBtn } from './RegisterForm.styled';
 import { Formik } from 'formik';
 import { toast } from 'react-toastify';
-import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  updateProfile,
+} from 'firebase/auth';
 import { useDispatch } from 'react-redux';
 import { setUser } from '../../redux/auth/slice';
 
@@ -19,22 +23,33 @@ const RegisterForm = ({ closeModal }) => {
   const dispatch = useDispatch();
   const auth = getAuth();
 
-  const handleSubmit = values => {
-    createUserWithEmailAndPassword(auth, values.email, values.password)
-      .then(({ user }) => {
-        dispatch(
-          setUser({
-            email: user.email,
-            id: user.uid,
-            token: user.accessToken,
-            name: user.displayName,
-          })
-        );
-        // localStorage.setItem('accessToken', user.accessToken);
-      })
-      .catch(console.error);
-    toast.success(`Welcome ${values.name}`);
-    closeModal();
+  const handleSubmit = async values => {
+    try {
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        values.email,
+        values.password
+      );
+      const { user } = userCredential;
+
+      await updateProfile(user, {
+        displayName: values.name,
+      });
+
+      dispatch(
+        setUser({
+          email: user.email,
+          id: user.uid,
+          token: user.accessToken,
+          name: values.name,
+        })
+      );
+      toast.success(`Welcome ${values.name}`);
+      closeModal();
+    } catch (error) {
+      console.error('Error registering:', error);
+      toast.error('Error registering');
+    }
   };
   return (
     <>
