@@ -55,7 +55,7 @@ const Header = () => {
           <NavBar>
             <NavBarLink to="/">Home</NavBarLink>
             <NavBarLink to="/psychologists">Psychologists</NavBarLink>
-            <NavBarLink to="/favorites">Favorites</NavBarLink>
+            {!isAuth && <NavBarLink to="/favorites">Favorites</NavBarLink>}
           </NavBar>
           {isAuth ? (
             <AuthBox>

@@ -28,9 +28,22 @@ export const NavBar = styled.div`
 `;
 
 export const NavBarLink = styled(NavLink)`
+  position: relative;
   font-weight: 400;
   line-height: 1.25em;
   letter-spacing: -0.16px;
+
+  &.active::after {
+    content: '';
+    position: absolute;
+    display: block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: ${({ theme }) => theme.colors.mainGreen};
+  }
 `;
 
 export const AuthBox = styled.div`

@@ -18,8 +18,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectFavorites } from '../../redux/selectors';
 import { addToFavorites, removeFromFavorites } from '../../redux/slice';
 import { toast } from 'react-toastify';
+import { useAuth } from 'hooks/useAuth';
 
 const SingleCard = ({ psychologist, openModal }) => {
+  const { isAuth } = useAuth();
   const dispatch = useDispatch();
   const [readMore, setReadMore] = useState(false);
   const favorites = useSelector(selectFavorites);
@@ -41,6 +43,10 @@ const SingleCard = ({ psychologist, openModal }) => {
   } = psychologist;
 
   const handleToggleFav = () => {
+    if (isAuth) {
+      alert(`Please login to add psychologists to favorites`);
+      return;
+    }
     if (isFavorite) {
       dispatch(removeFromFavorites(psychologist.id));
       toast.error(`Psychologist ${psychologist.name} deleted from favorites`);
