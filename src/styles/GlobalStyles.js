@@ -63,4 +63,19 @@ img {
 export const Container = styled.div`
   padding-left: 128px;
   padding-right: 128px;
+
+  @media only screen and (max-width: 768px) {
+    padding-left: 68px;
+    padding-right: 68px;
+  }
+
+  @media only screen and (max-width: 375px) {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+
+  @media (min-width: 320px) and (max-width: 374px) {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
 `;

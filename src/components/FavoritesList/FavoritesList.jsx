@@ -12,7 +12,6 @@ import Filter from 'components/Filter/Filter';
 const FavoritesList = ({ openModal }) => {
   const favorites = useSelector(selectFavorites);
   const [filteredData, setFilteredData] = useState([...favorites]);
-  const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(3);
 
   useEffect(() => {
@@ -65,7 +64,6 @@ const FavoritesList = ({ openModal }) => {
 
   const handleLoadMore = () => {
     setLimit(prevLimit => prevLimit + 3);
-    setPage(prevPage => prevPage + 1);
   };
 
   return (

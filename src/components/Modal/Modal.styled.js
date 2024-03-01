@@ -21,7 +21,17 @@ export const ModalContent = styled.div`
   padding: 64px;
   border-radius: 30px;
   background: ${({ theme }) => theme.colors.white};
+  max-height: 579px;
+  overflow-y: auto;
   z-index: 1001;
+
+  @media only screen and (max-width: 768px) {
+    max-height: 500px;
+  }
+
+  @media only screen and (max-width: 375px) {
+    padding: 24px;
+  }
 `;
 
 export const CloseBtn = styled.button`

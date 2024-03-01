@@ -4,6 +4,11 @@ import { Container } from 'styles/GlobalStyles';
 export const StyledContainer = styled(Container)`
   padding-top: 64px;
   padding-bottom: 100px;
+
+  @media only screen and (max-width: 375px) {
+    padding-top: 32px;
+    padding-bottom: 50px;
+  }
 `;
 
 export const List = styled.ul`

@@ -9,6 +9,16 @@ export const StyledContainer = styled(Container)`
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid rgba(25, 26, 21, 0.1);
+
+  @media only screen and (max-width: 768px) {
+    padding-top: 14px;
+    padding-bottom: 14px;
+  }
+
+  @media only screen and (max-width: 375px) {
+    flex-direction: column;
+    gap: 10px;
+  }
 `;
 
 export const NameNavLink = styled(NavLink)`
@@ -16,6 +26,10 @@ export const NameNavLink = styled(NavLink)`
   font-weight: 700;
   line-height: 1.2em;
   letter-spacing: -0.4px;
+
+  @media only screen and (max-width: 768px) {
+    font-size: 16px;
+  }
 `;
 
 export const Span = styled.span`
@@ -25,6 +39,10 @@ export const Span = styled.span`
 export const NavBar = styled.div`
   display: flex;
   gap: 40px;
+
+  @media only screen and (max-width: 768px) {
+    gap: 15px;
+  }
 `;
 
 export const NavBarLink = styled(NavLink)`
@@ -60,6 +78,10 @@ export const SignInBtn = styled.button`
   font-weight: 500;
   line-height: 1.25em;
   letter-spacing: -0.16px;
+
+  @media only screen and (max-width: 768px) {
+    padding: 7px 20px;
+  }
 `;
 
 export const SignUpBtn = styled.button`
@@ -70,6 +92,10 @@ export const SignUpBtn = styled.button`
   font-weight: 500;
   line-height: 1.25em;
   letter-spacing: -0.16px;
+
+  @media only screen and (max-width: 768px) {
+    padding: 7px 20px;
+  }
 `;
 
 export const UserIcon = styled.div`
@@ -84,12 +110,21 @@ export const UserIcon = styled.div`
   & svg {
     fill: ${({ theme }) => theme.colors.white};
   }
+
+  @media only screen and (max-width: 768px) {
+    width: 30px;
+    height: 30px;
+  }
 `;
 
 export const AccountBox = styled.div`
   display: flex;
   gap: 28px;
   align-items: center;
+
+  @media only screen and (max-width: 768px) {
+    gap: 10px;
+  }
 `;
 
 export const AccountInfo = styled.div`
@@ -114,4 +149,8 @@ export const LogoutBtn = styled.button`
   font-weight: 500;
   line-height: 1.25em;
   letter-spacing: -0.16px;
+
+  @media only screen and (max-width: 768px) {
+    padding: 7px 20px;
+  }
 `;

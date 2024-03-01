@@ -14,6 +14,7 @@ import { toast } from 'react-toastify';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { useDispatch, useSelector } from 'react-redux';
 import { setUser } from '../../redux/auth/slice';
+import { loginSchema } from '../../schemas/yupSchemas';
 
 const LoginForm = ({ closeModal }) => {
   const dispatch = useDispatch();
@@ -46,6 +47,7 @@ const LoginForm = ({ closeModal }) => {
         </Text>
         <Formik
           initialValues={{ email: '', password: '' }}
+          validationSchema={loginSchema}
           validate={values => {
             const errors = {};
             if (!values.email) {

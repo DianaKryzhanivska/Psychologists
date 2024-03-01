@@ -11,7 +11,6 @@ const PsychologistsList = ({ openModal }) => {
   const favorites = useSelector(selectFavorites);
   const [psychologists, setPsychologists] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
-  const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(3);
 
   useEffect(() => {
@@ -47,16 +46,12 @@ const PsychologistsList = ({ openModal }) => {
         break;
       case 'Less than 10$':
         setFilteredData(prevData => [
-          ...psychologists.filter(
-            psychologist => psychologist.price_per_hour < 10
-          ),
+          ...prevData.sort((a, b) => a.price_per_hour - b.price_per_hour),
         ]);
         break;
       case 'Greater than 10$':
         setFilteredData(prevData => [
-          ...psychologists.filter(
-            psychologist => psychologist.price_per_hour >= 10
-          ),
+          ...prevData.sort((a, b) => b.price_per_hour - a.price_per_hour),
         ]);
         break;
       case 'Popular':
@@ -81,7 +76,6 @@ const PsychologistsList = ({ openModal }) => {
 
   const handleLoadMore = () => {
     setLimit(prevLimit => prevLimit + 3);
-    setPage(prevPage => prevPage + 1);
   };
 
   return (

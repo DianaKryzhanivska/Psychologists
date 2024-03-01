@@ -2,6 +2,11 @@ import styled from 'styled-components';
 
 export const Wrapper = styled.div`
   width: 472px;
+
+  @media only screen and (max-width: 375px) {
+    width: 300px;
+    margin-top: 30px;
+  }
 `;
 
 export const Title = styled.h2`
@@ -11,6 +16,10 @@ export const Title = styled.h2`
   line-height: 1.2em;
   letter-spacing: -0.8px;
   margin-bottom: 20px;
+
+  @media only screen and (max-width: 375px) {
+    font-size: 28px;
+  }
 `;
 
 export const Text = styled.p`
@@ -100,4 +109,8 @@ export const SubmitBtn = styled.button`
   font-weight: 500;
   line-height: 1.25em;
   letter-spacing: -0.16px;
+
+  @media only screen and (max-width: 375px) {
+    padding: 10px 20px;
+  }
 `;

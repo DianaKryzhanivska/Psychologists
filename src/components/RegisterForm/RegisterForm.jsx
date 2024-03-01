@@ -18,6 +18,7 @@ import {
 } from 'firebase/auth';
 import { useDispatch } from 'react-redux';
 import { setUser } from '../../redux/auth/slice';
+import { registerSchema } from '../../schemas/yupSchemas';
 
 const RegisterForm = ({ closeModal }) => {
   const dispatch = useDispatch();
@@ -62,6 +63,7 @@ const RegisterForm = ({ closeModal }) => {
         </Text>
         <Formik
           initialValues={{ name: '', email: '', password: '' }}
+          validationSchema={registerSchema}
           validate={values => {
             const errors = {};
             if (!values.name) {

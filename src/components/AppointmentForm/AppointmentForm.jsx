@@ -17,7 +17,6 @@ import { toast } from 'react-toastify';
 const AppointmentForm = ({ psychologist, closeModal }) => {
   const { name, avatar_url } = psychologist;
   const handleFormSubmit = values => {
-    console.log(values);
     toast.success(`Made an appointment successfully!`);
     closeModal();
   };

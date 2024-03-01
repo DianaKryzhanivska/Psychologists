@@ -7,6 +7,14 @@ export const Item = styled.li`
   padding: 24px;
   display: flex;
   gap: 24px;
+
+  @media only screen and (max-width: 768px) {
+    padding-top: 60px;
+  }
+
+  @media only screen and (max-width: 375px) {
+    flex-direction: column;
+  }
 `;
 
 export const Statistics = styled.div`
@@ -23,16 +31,31 @@ export const Statistics = styled.div`
   & span {
     color: ${({ theme }) => theme.colors.green};
   }
+
+  @media only screen and (max-width: 375px) {
+    top: 10px;
+    right: 10px;
+  }
 `;
 
 export const Rating = styled.p`
   margin-left: 8px;
   margin-right: 16px;
+
+  @media only screen and (max-width: 375px) {
+    margin-left: 4px;
+    margin-right: 8px;
+  }
 `;
 
 export const Price = styled.p`
   margin-left: 16px;
   margin-right: 28px;
+
+  @media only screen and (max-width: 375px) {
+    margin-left: 8px;
+    margin-right: 15px;
+  }
 `;
 
 export const BtnFav = styled.button`
@@ -71,6 +94,10 @@ export const ImageWrapper = styled.div`
     top: 9px;
     right: 14px;
     fill: ${({ theme }) => theme.colors.green};
+  }
+
+  @media only screen and (max-width: 375px) {
+    max-width: 100px;
   }
 `;
 

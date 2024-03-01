@@ -2,6 +2,10 @@ import styled from 'styled-components';
 
 export const Wrapper = styled.div`
   width: 438px;
+
+  @media only screen and (max-width: 375px) {
+    width: 300px;
+  }
 `;
 
 export const Title = styled.h2`
@@ -11,6 +15,10 @@ export const Title = styled.h2`
   line-height: 1.2em;
   letter-spacing: -0.8px;
   margin-bottom: 20px;
+
+  @media only screen and (max-width: 375px) {
+    font-size: 28px;
+  }
 `;
 
 export const Text = styled.p`
@@ -23,6 +31,11 @@ export const Form = styled.form`
   display: flex;
   flex-direction: column;
 
+  & span {
+    color: red;
+    font-size: 14px;
+  }
+
   & input {
     padding: 16px 18px;
     border-radius: 12px;
@@ -33,6 +46,10 @@ export const Form = styled.form`
       color: ${({ theme }) => theme.colors.black};
       line-height: 1.25em;
     }
+  }
+
+  & input.error {
+    border: 1px solid red;
   }
 `;
 
@@ -58,4 +75,8 @@ export const SubmitBtn = styled.button`
   border-radius: 30px;
   background: ${({ theme }) => theme.colors.mainGreen};
   color: ${({ theme }) => theme.colors.white};
+
+  @media only screen and (max-width: 375px) {
+    padding: 10px 20px;
+  }
 `;

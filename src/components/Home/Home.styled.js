@@ -5,6 +5,24 @@ import { Container } from 'styles/GlobalStyles';
 export const StyledContainer = styled(Container)`
   padding-top: 78px;
   padding-bottom: 100px;
+
+  &::before {
+    content: '';
+    position: absolute;
+    width: 469px;
+    height: 469px;
+    border-radius: 469px;
+    background: ${({ theme }) => theme.colors.mainGreen};
+    filter: blur(500px);
+    right: 100px;
+    bottom: 50px;
+    z-index: -100;
+  }
+
+  @media only screen and (max-width: 768px) {
+    padding-top: 40px;
+    padding-bottom: 50px;
+  }
 `;
 
 export const HeroWrapper = styled.div`
@@ -15,6 +33,14 @@ export const HeroWrapper = styled.div`
 
 export const HeroMainText = styled.div`
   width: 595px;
+
+  @media only screen and (max-width: 375px) {
+    width: 300px;
+  }
+
+  @media (min-width: 320px) and (max-width: 374px) {
+    width: 250px;
+  }
 `;
 
 export const HeroTitle = styled.h1`
@@ -24,6 +50,10 @@ export const HeroTitle = styled.h1`
   line-height: 1.02em;
   letter-spacing: -1.6px;
   color: ${({ theme }) => theme.colors.black};
+
+  @media only screen and (max-width: 375px) {
+    font-size: 50px;
+  }
 `;
 
 export const Span = styled.span`
@@ -39,6 +69,14 @@ export const HeroText = styled.p`
   line-height: 1.33em;
   letter-spacing: -0.36px;
   color: ${({ theme }) => theme.colors.black};
+
+  @media only screen and (max-width: 375px) {
+    width: 300px;
+  }
+
+  @media (min-width: 320px) and (max-width: 374px) {
+    width: 250px;
+  }
 `;
 
 export const NavLinkStyled = styled(NavLink)`
@@ -62,6 +100,10 @@ export const ImageWrapper = styled.div`
   border-radius: 10px;
   position: relative;
   z-index: -10;
+
+  @media only screen and (max-width: 768px) {
+    display: none;
+  }
 `;
 
 export const HeroInfoBox = styled.div`
