@@ -65,4 +65,9 @@ export const MeetingBtn = styled.button`
   font-weight: 500;
   line-height: 1.25em;
   letter-spacing: -0.16px;
+  transition: transform 0.2s;
+
+  &:hover {
+    transform: scale(1.1);
+  }
 `;

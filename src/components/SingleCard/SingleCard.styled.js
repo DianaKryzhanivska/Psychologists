@@ -63,6 +63,11 @@ export const BtnFav = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: transform 0.2s;
+
+  &:hover {
+    transform: scale(1.1);
+  }
 
   & svg {
     width: 26px;

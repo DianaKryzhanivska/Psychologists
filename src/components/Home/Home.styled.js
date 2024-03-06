@@ -90,6 +90,11 @@ export const NavLinkStyled = styled(NavLink)`
   font-weight: 500;
   line-height: 1.2em;
   letter-spacing: -0.2px;
+  transition: transform 0.2s;
+
+  &:hover {
+    transform: scale(1.1);
+  }
 `;
 
 export const SvgStyled = styled.svg`
