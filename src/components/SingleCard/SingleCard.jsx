@@ -7,6 +7,7 @@ import {
   Item,
   Job,
   Name,
+  PopUpMessage,
   Price,
   Rating,
   ReadMoreBtn,
@@ -19,11 +20,13 @@ import { selectFavorites } from '../../redux/selectors';
 import { addToFavorites, removeFromFavorites } from '../../redux/slice';
 import { toast } from 'react-toastify';
 import { useAuth } from 'hooks/useAuth';
+import Modal from 'components/Modal/Modal';
 
 const SingleCard = ({ psychologist, openModal }) => {
   const { isAuth } = useAuth();
   const dispatch = useDispatch();
   const [readMore, setReadMore] = useState(false);
+  const [isPopUpOpen, setIsPopUpOpen] = useState(false);
   const favorites = useSelector(selectFavorites);
   const isFavorite = favorites.some(
     favorite => favorite.id === psychologist.id
@@ -42,9 +45,17 @@ const SingleCard = ({ psychologist, openModal }) => {
     about,
   } = psychologist;
 
+  const handleOpenPopUp = () => {
+    setIsPopUpOpen(true);
+  };
+
+  const handleClosePopUp = () => {
+    setIsPopUpOpen(false);
+  };
+
   const handleToggleFav = () => {
     if (isAuth) {
-      alert(`Please login to add psychologists to favorites`);
+      handleOpenPopUp();
       return;
     }
     if (isFavorite) {
@@ -121,6 +132,11 @@ const SingleCard = ({ psychologist, openModal }) => {
           )}
         </div>
       </Item>
+      <Modal isOpen={isPopUpOpen} onClose={handleClosePopUp}>
+        <PopUpMessage>
+          Please Log In to add psychologists to favorites
+        </PopUpMessage>
+      </Modal>
     </>
   );
 };

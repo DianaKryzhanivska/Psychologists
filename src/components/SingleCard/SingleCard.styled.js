@@ -156,3 +156,11 @@ export const ReadMoreBtn = styled.button`
   line-height: 1.5em;
   text-decoration-line: underline;
 `;
+
+export const PopUpMessage = styled.p`
+  margin-top: 20px;
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 500;
+`;
