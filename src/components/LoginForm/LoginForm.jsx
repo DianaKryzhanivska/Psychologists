@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import sprite from '../../images/sprite.svg';
 import {
   Form,
@@ -20,6 +20,7 @@ const LoginForm = ({ closeModal }) => {
   const dispatch = useDispatch();
   const auth = getAuth();
   const { name } = useSelector(state => state.auth);
+  const [loginError, setLoginError] = useState('');
   const handleSubmit = values => {
     signInWithEmailAndPassword(auth, values.email, values.password)
       .then(({ user }) => {
@@ -31,10 +32,12 @@ const LoginForm = ({ closeModal }) => {
             name: name,
           })
         );
+        toast.success(`Welcome ${values.email}`);
+        closeModal();
       })
-      .catch(console.error);
-    toast.success(`Welcome ${values.email}`);
-    closeModal();
+      .catch(error => {
+        setLoginError('Invalid email or password');
+      });
   };
 
   return (
@@ -97,6 +100,7 @@ const LoginForm = ({ closeModal }) => {
                 {errors.password && touched.password && (
                   <span>{errors.password}</span>
                 )}
+                {loginError && <span>{loginError}</span>}
                 <Icon width="20" height="20">
                   <use href={`${sprite}#eye-off`} />
                 </Icon>
