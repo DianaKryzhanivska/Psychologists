@@ -21,7 +21,13 @@ const LoginForm = ({ closeModal }) => {
   const dispatch = useDispatch();
   const auth = getAuth();
   const { name } = useSelector(state => state.auth);
+  const [showPassword, setShowPassword] = useState(false);
   const [loginError, setLoginError] = useState('');
+
+  const handleTogglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
   const handleSubmit = values => {
     signInWithEmailAndPassword(auth, values.email, values.password)
       .then(({ user }) => {
@@ -91,7 +97,7 @@ const LoginForm = ({ closeModal }) => {
                 {errors.email && touched.email && <span>{errors.email}</span>}
                 <PasswordInputBox>
                   <input
-                    type="text"
+                    type={showPassword ? 'text' : 'password'}
                     name="password"
                     placeholder="Password"
                     onChange={handleChange}
@@ -101,9 +107,23 @@ const LoginForm = ({ closeModal }) => {
                     }
                     value={values.password}
                   />
-                  <Icon width="20" height="20">
-                    <use href={`${sprite}#eye-off`} />
-                  </Icon>
+                  {!showPassword ? (
+                    <Icon
+                      width="20"
+                      height="20"
+                      onClick={handleTogglePasswordVisibility}
+                    >
+                      <use href={`${sprite}#eye-off`} />
+                    </Icon>
+                  ) : (
+                    <Icon
+                      width="20"
+                      height="20"
+                      onClick={handleTogglePasswordVisibility}
+                    >
+                      <use href={`${sprite}#eye`} />
+                    </Icon>
+                  )}
                 </PasswordInputBox>
                 {errors.password && touched.password && (
                   <span>{errors.password}</span>

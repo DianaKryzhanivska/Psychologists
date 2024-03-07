@@ -2,11 +2,12 @@ import {
   Form,
   Icon,
   InputBox,
+  PasswordInputBox,
   Text,
   Title,
   Wrapper,
 } from 'components/LoginForm/LoginForm.styled';
-import React from 'react';
+import React, { useState } from 'react';
 import sprite from '../../images/sprite.svg';
 import { SubmitBtn } from './RegisterForm.styled';
 import { Formik } from 'formik';
@@ -23,6 +24,11 @@ import { registerSchema } from '../../schemas/yupSchemas';
 const RegisterForm = ({ closeModal }) => {
   const dispatch = useDispatch();
   const auth = getAuth();
+  const [showPassword, setShowPassword] = useState(false);
+
+  const handleTogglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
 
   const handleSubmit = async values => {
     try {
@@ -118,21 +124,39 @@ const RegisterForm = ({ closeModal }) => {
                   value={values.email}
                 />
                 {errors.email && touched.email && <span>{errors.email}</span>}
-                <input
-                  type="text"
-                  name="password"
-                  placeholder="Password"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  className={errors.password && touched.password ? 'error' : ''}
-                  value={values.password}
-                />
+                <PasswordInputBox>
+                  <input
+                    type={showPassword ? 'text' : 'password'}
+                    name="password"
+                    placeholder="Password"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    className={
+                      errors.password && touched.password ? 'error' : ''
+                    }
+                    value={values.password}
+                  />
+                  {!showPassword ? (
+                    <Icon
+                      width="20"
+                      height="20"
+                      onClick={handleTogglePasswordVisibility}
+                    >
+                      <use href={`${sprite}#eye-off`} />
+                    </Icon>
+                  ) : (
+                    <Icon
+                      width="20"
+                      height="20"
+                      onClick={handleTogglePasswordVisibility}
+                    >
+                      <use href={`${sprite}#eye`} />
+                    </Icon>
+                  )}
+                </PasswordInputBox>
                 {errors.password && touched.password && (
                   <span>{errors.password}</span>
                 )}
-                <Icon width="20" height="20">
-                  <use href={`${sprite}#eye-off`} />
-                </Icon>
               </InputBox>
               <SubmitBtn type="submit" disabled={isSubmitting}>
                 Sign Up
