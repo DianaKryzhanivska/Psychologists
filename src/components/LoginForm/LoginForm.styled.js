@@ -54,11 +54,15 @@ export const Form = styled.form`
 `;
 
 export const InputBox = styled.div`
-  position: relative;
   display: flex;
   flex-direction: column;
   gap: 18px;
   margin-bottom: 40px;
+`;
+
+export const PasswordInputBox = styled.div`
+  position: relative;
+  display: grid;
 `;
 
 export const Icon = styled.svg`
