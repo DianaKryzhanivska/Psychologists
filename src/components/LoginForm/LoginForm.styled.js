@@ -83,6 +83,7 @@ export const SubmitBtn = styled.button`
 
   &:hover {
     transform: scale(1.1);
+    background: ${({ theme }) => theme.colors.mainGreenHover};
   }
 
   @media only screen and (max-width: 375px) {

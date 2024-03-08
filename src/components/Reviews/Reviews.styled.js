@@ -69,5 +69,6 @@ export const MeetingBtn = styled.button`
 
   &:hover {
     transform: scale(1.1);
+    background: ${({ theme }) => theme.colors.mainGreenHover};
   }
 `;

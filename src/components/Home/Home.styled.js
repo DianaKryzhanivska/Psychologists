@@ -94,6 +94,7 @@ export const NavLinkStyled = styled(NavLink)`
 
   &:hover {
     transform: scale(1.1);
+    background: ${({ theme }) => theme.colors.mainGreenHover};
   }
 `;
 

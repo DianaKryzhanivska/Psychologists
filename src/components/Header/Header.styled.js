@@ -93,6 +93,10 @@ export const SignUpBtn = styled.button`
   line-height: 1.25em;
   letter-spacing: -0.16px;
 
+  &:hover {
+    background: ${({ theme }) => theme.colors.mainGreenHover};
+  }
+
   @media only screen and (max-width: 768px) {
     padding: 7px 20px;
   }
